@@ -87,7 +87,8 @@ export function createServer() {
       return json(res, 405, { error: 'method_not_allowed', message: 'Only GET and POST are allowed.' });
     }
     const host = req.headers.host ?? '';
-    if (!/^(localhost|127\.0\.0\.1|local\.ping-devops\.com)(:\d+)?$/.test(host)) {
+    if (!/^(localhost|127\.0\.0\.1|local\.ping-devops\.com)(:\d+)?$/.test(host)
+      && !/^(pf-agent-client-sync\.local\.ping-devops\.com|pf-agent-client-sync-lab)(:\d+)?$/.test(host)) {
       return json(res, 403, { error: 'bad_host', message: 'Host not allowed.' });
     }
     if (req.method === 'POST' && !sameOrigin(req)) {
