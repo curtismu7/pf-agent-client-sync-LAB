@@ -24,7 +24,9 @@ export default function App() {
     const steps = []; let n = 0;
     for (const line of talkMd.split("\n")) {
       const m = line.match(/^\d+\.\s+(?:"(.+?)"|\*\*(.+?)\.\*\*\s*(.*))$/);
-      if (m) { n += 1; steps.push({ id: `s${n}`, title: (m[1] || m[2]).slice(0, 60), say: m[1] || m[3] }); }
+      if (m) { n += 1; steps.push({ id: `s${n}`, title: (m[1] || m[2]).slice(0, 60), say: m[1] || m[3] }  );
+}
+
     }
     return steps.length ? steps : [{ id: "s1", title: "Talk track", say: talkMd.slice(0, 600) }];
   })();
@@ -98,6 +100,8 @@ export default function App() {
         {tab === 'diagram' && <FlowDiagram id="pf-agent-client-sync" />}
         {tab === 'about' && <AboutTab info={info} />}
       </main>
+
+      <TalkTrackDialog isOpen={talkOpen} onClose={() => setTalkOpen(false)} talk={talkSteps} />
     </div>
   );
 }
@@ -279,5 +283,4 @@ function AboutTab({ info }) {
     </section>
   );
 }
-      <TalkTrackDialog isOpen={talkOpen} onClose={() => setTalkOpen(false)} talk={talkSteps} />
 
