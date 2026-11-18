@@ -21,7 +21,7 @@ jobs:
         run: |
           node server/src/server.js &
           SERVER_PID=$!
-          for i in $(seq 1 20); do curl -sf http://127.0.0.1:7822/api/health >/dev/null && break; sleep 0.5; done
+          for i in $(seq 1 20); do curl -sf http://127.0.0.1:7824/api/health >/dev/null && break; sleep 0.5; done
           npm run doctor
           STATUS=$?
           kill $SERVER_PID

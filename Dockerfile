@@ -9,6 +9,6 @@ FROM node:26-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=build /app /app
-EXPOSE 7822
+EXPOSE 7824
 USER node
 CMD ["node", "server/src/server.js"]

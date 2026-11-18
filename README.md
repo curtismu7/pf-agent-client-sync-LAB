@@ -19,14 +19,14 @@ subject to Product confirmation.
 ## Run
 
 ```sh
-npm ci && npm run build && npm start   # http://127.0.0.1:7822
+npm ci && npm run build && npm start   # http://127.0.0.1:7824
 npm test                               # server tests
 ```
 
 Docker:
 
 ```sh
-docker compose up --build              # publishes 127.0.0.1:7822 only
+docker compose up --build              # publishes 127.0.0.1:7824 only
 ```
 
 ## Modes

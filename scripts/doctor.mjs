@@ -24,7 +24,7 @@ function getJson(url) {
   });
 }
 
-const base = `http://127.0.0.1:${process.env.PORT || 7822}`;
+const base = `http://127.0.0.1:${process.env.PORT || 7824}`;
 
 const files = ['README.md', 'CLAUDE.md', 'docs/talk-track.md', 'content-pack.json',
   'Dockerfile', 'docker-compose.yml', '.github/workflows/ci.yml', 'docs/shelf-entry.json'];

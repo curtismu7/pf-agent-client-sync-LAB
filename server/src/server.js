@@ -219,7 +219,7 @@ export function createServer() {
 }
 
 if (process.argv[1] && process.argv[1].endsWith('server.js')) {
-  const port = Number(process.env.PORT || 7822);
+  const port = Number(process.env.PORT || 7824);
   const server = createServer();
   const bind = process.env.BIND_HOST || '127.0.0.1';
   server.listen(port, bind, () => {
