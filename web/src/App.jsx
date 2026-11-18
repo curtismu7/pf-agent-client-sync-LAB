@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import TopMenu from './top-menu/TopMenu.jsx';
+import TalkTrackDialog from "./talk-track/TalkTrackDialog.jsx";
+import talkMd from "../../docs/talk-track.md?raw";
 import JsonPane from './json/JsonPane.jsx';
 import FlowDiagram from './StudioDiagram.jsx';
 import './app.css';
@@ -17,6 +19,15 @@ export default function App() {
   const [tab, setTab] = useState('sync');
   const [info, setInfo] = useState(null);
   const [theme, setTheme] = useState('auto');
+  const [talkOpen, setTalkOpen] = useState(false);
+  const talkSteps = (() => {
+    const steps = []; let n = 0;
+    for (const line of talkMd.split("\n")) {
+      const m = line.match(/^\d+\.\s+(?:"(.+?)"|\*\*(.+?)\.\*\*\s*(.*))$/);
+      if (m) { n += 1; steps.push({ id: `s${n}`, title: (m[1] || m[2]).slice(0, 60), say: m[1] || m[3] }); }
+    }
+    return steps.length ? steps : [{ id: "s1", title: "Talk track", say: talkMd.slice(0, 600) }];
+  })();
   const [fontSize, setFontSize] = useState('M');
 
   useEffect(() => {
@@ -55,6 +66,7 @@ export default function App() {
             },
           }}
           theme={{ value: theme, onChange: setTheme }}
+          talkTrack={{ active: talkOpen, onToggle: () => setTalkOpen((v) => !v) }}
           fontSize={{ value: fontSize, onChange: setFontSize }}
         />
       </header>
@@ -267,3 +279,5 @@ function AboutTab({ info }) {
     </section>
   );
 }
+      <TalkTrackDialog isOpen={talkOpen} onClose={() => setTalkOpen(false)} talk={talkSteps} />
+
