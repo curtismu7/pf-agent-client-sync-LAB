@@ -29,10 +29,13 @@ async function pfFetchJson(config, path, { timeoutMs = 8000 } = {}) {
   }
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const insecure = /localhost|host\.docker\.internal|127\.0\.0\.1/.test(config.baseUrl);
+  if (insecure) process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   try {
     const auth = Buffer.from(`${config.username}:${config.password}`).toString('base64');
-    const res = await fetch(new URL(path, config.baseUrl), {
-      headers: { Authorization: `Basic ${auth}`, Accept: 'application/json' },
+    const base = config.baseUrl.endsWith('/') ? config.baseUrl : `${config.baseUrl}/`;
+    const res = await fetch(`${base}${path.replace(/^\//, '')}`, {
+      headers: { Authorization: `Basic ${auth}`, Accept: 'application/json', 'X-XSRF-Header': 'pingfederate' },
       signal: controller.signal,
     });
     if (!res.ok) {
@@ -62,7 +65,7 @@ export function createPfReal(env = process.env) {
         name: c.name ?? c.clientId,
         grantTypes: c.allowedGrantTypes ?? c.grantTypes ?? [],
         scopes: (c.restrictedScopes ?? c.scopes ?? []),
-        tags: c.tags ?? [],
+        tags: (c.tags ?? []).map((t) => (typeof t === 'string' ? t : t?.id)).filter(Boolean),
         enabled: c.enabled ?? true,
         owner: c.ownerId ?? null,
         createdAt: c.createdBy?.date ?? null,

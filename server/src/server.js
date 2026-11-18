@@ -52,7 +52,11 @@ function sameOrigin(req) {
   const host = req.headers.host;
   if (!origin) return true;
   try {
-    return new URL(origin).host === host;
+    if (new URL(origin).host === host) return true;
+    // Behind the shared lab-proxy the SPA origin is local.ping-devops.com:<proxy-port>
+    // while the upstream Host header is rewritten to pf-agent-client-sync.local.ping-devops.com:<port>.
+    return /^(localhost|127\.0\.0\.1|local\.ping-devops\.com)(:\d+)?$/.test(new URL(origin).host)
+      && /^(pf-agent-client-sync\.local\.ping-devops\.com|pf-agent-client-sync-lab)(:\d+)?$/.test(host ?? '');
   } catch {
     return false;
   }
