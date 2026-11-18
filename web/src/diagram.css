@@ -1,0 +1,4 @@
+:root{--dg-red:#b3121d;--dg-green:#1a7f37;--dg-dark:#1c1e21}
+:root[data-theme=dark]{--dg-red:#ff5a63;--dg-green:#4cc38a;--dg-dark:#9aa0aa}
+.steps{font-size:.9rem;max-width:720px}
+.flow-wrap{height:480px}

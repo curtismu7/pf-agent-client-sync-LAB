@@ -1,0 +1,13 @@
+{
+  "name": "pf-agent-client-sync-LAB",
+  "displayName": "PF Agent Client Sync LAB",
+  "description": "PingFederate 13.1 AI-Agent-tagged OAuth clients synced one-way into simulated PingIDM managed agent records — the foundation for agent identity, ownership and lifecycle.",
+  "catalogId": "D000",
+  "port": 7822,
+  "composeFile": "../../pf-agent-client-sync-LAB/docker-compose.yml",
+  "tier": "Demo",
+  "pingProducts": [],
+  "tags": ["agent-identity", "pingfederate", "pingidm", "simulated"],
+  "addedAt": "2026-11-18",
+  "repo": "curtismu7/pf-agent-client-sync-LAB"
+}

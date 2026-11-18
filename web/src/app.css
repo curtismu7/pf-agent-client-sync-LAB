@@ -1,0 +1,148 @@
+:root {
+  --bg: #f6f5f3;
+  --surface: #ffffff;
+  --text: #1c1e21;
+  --muted: #5c6470;
+  --accent: #b3121d;
+  --accent-soft: #fdecec;
+  --border: #d9d7d3;
+  --ok: #1a7f37;
+  --ok-soft: #e6f4ea;
+  --off-soft: #eee;
+  --err: #b3121d;
+  --fs: 16px;
+}
+:root[data-theme='dark'] {
+  --bg: #16181c;
+  --surface: #22252b;
+  --text: #e8e6e3;
+  --muted: #9aa0aa;
+  --accent: #ff5a63;
+  --accent-soft: #3a1418;
+  --border: #3a3e46;
+  --ok: #4cc38a;
+  --ok-soft: #14301f;
+  --off-soft: #2c2f36;
+  --err: #ff5a63;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--fs);
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+
+.shell-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  background: #1c1e21;
+  color: #fff;
+  border-bottom: 3px solid var(--accent);
+  flex-wrap: wrap;
+}
+:root[data-theme='dark'] .shell-bar { background: #0d0e10; }
+.shell-bar__brand { display: flex; flex-direction: column; }
+.shell-bar__title { font-weight: 700; font-size: 1.05rem; }
+.shell-bar__sub { font-size: 0.78rem; opacity: 0.75; }
+
+.sim-banner {
+  padding: 8px 20px;
+  background: var(--accent-soft);
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.sim-banner code { background: var(--surface); padding: 0 4px; border: 1px solid var(--border); }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 10px 20px 0;
+  flex-wrap: wrap;
+}
+.tab {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font: inherit;
+}
+.tab--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.page { padding: 20px; flex: 1; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.card h2 { margin-top: 0; font-size: 1.05rem; }
+
+.btn {
+  font: inherit;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+
+.muted { color: var(--muted); font-size: 0.88rem; }
+.ok { color: var(--ok); }
+.err { color: var(--err); font-weight: 600; }
+
+.kpis { display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+.kpi {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  min-width: 120px;
+  background: var(--surface);
+}
+.kpi--accent { border-top: 3px solid var(--accent); }
+.kpi__n { font-size: 1.6rem; font-weight: 700; }
+.kpi__l { font-size: 0.78rem; color: var(--muted); }
+
+.tbl { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+.tbl th, .tbl td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); }
+.tbl th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+
+.chip { padding: 2px 10px; border-radius: 99px; font-size: 0.78rem; font-weight: 600; }
+.chip--ok { background: var(--ok-soft); color: var(--ok); }
+.chip--off { background: var(--off-soft); color: var(--muted); }
+
+.run-row { padding: 6px 0; border-bottom: 1px dashed var(--border); }
+.run-result { margin-top: 12px; }
+
+.flow-wrap { height: 560px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+
+@media (max-width: 375px) {
+  .page { padding: 10px; }
+  .tbl { font-size: 0.8rem; }
+  .kpis { gap: 8px; }
+  .kpi { min-width: 100px; padding: 8px 10px; }
+}

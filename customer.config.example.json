@@ -1,0 +1,13 @@
+{
+  "$comment": "Branding and vocabulary for this lab. Copy to customer.config.json (git-ignored) to override; bounded plain labels only, bad values fall back to defaults.",
+  "brand": {
+    "title": "PF Agent Client Sync LAB",
+    "tagline": "PingFederate 13.1 AI-Agent clients → PingIDM"
+  },
+  "vocabulary": {
+    "agent": "AI agent",
+    "record": "managed identity record",
+    "sync": "one-way sync"
+  },
+  "defaultVertical": "generic"
+}

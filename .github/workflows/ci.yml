@@ -1,0 +1,48 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 26
+      - run: npm ci || npm install
+      - run: npm --prefix web install || true
+      - run: npm test
+      - run: npm run build
+      - run: npm run doctor
+        env:
+          PORT: '7822'
+      - run: bash scripts/check-no-ai-attribution.sh
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  forbidden-strings:
+    runs-on: ubuntu-latest
+    env:
+      FORBIDDEN_STRINGS: ${{ secrets.FORBIDDEN_STRINGS }}
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          if [ -z "$FORBIDDEN_STRINGS" ]; then echo "FORBIDDEN_STRINGS not set"; exit 1; fi
+          MISS=0
+          while IFS= read -r s; do
+            [ -z "$s" ] && continue
+            if git grep -F "$s" -- . ; then echo "FORBIDDEN STRING FOUND: $s"; MISS=1; fi
+          done < <(printf '%s' "$FORBIDDEN_STRINGS")
+          exit $MISS

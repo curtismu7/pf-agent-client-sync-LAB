@@ -1,0 +1,71 @@
+{
+  "schema": "demo-content-pack/1",
+  "id": "pf-agent-client-sync",
+  "title": "PF Agent Client Sync LAB",
+  "version": "0.1.0",
+  "demo": {
+    "id": "pf-agent-client-sync",
+    "name": "PF Agent Client Sync LAB",
+    "catalog": "D000"
+  },
+  "glossary": [
+    {
+      "id": "ai-agent-tag",
+      "term": "AI Agent system tag",
+      "definition": "PingFederate 13.1 built-in system tag (_pf_system_tag_ai_agent) used to identify OAuth clients that are AI agents, filterable through the Admin API."
+    },
+    {
+      "id": "one-way-sync",
+      "term": "One-way sync",
+      "definition": "The proposed connector synchronizes tagged OAuth clients from PingFederate into PingIDM only; PingIDM changes never flow back."
+    },
+    {
+      "id": "agent-identity-record",
+      "term": "Agent identity record",
+      "definition": "A managed identity record in PingIDM created for each AI-agent-tagged OAuth client — the foundation for ownership, privileges and lifecycle management."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pf-tag-management",
+      "title": "PingFederate 13.1 Tag Management (administrators reference guide)",
+      "url": "https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/pf_tag_management.html",
+      "kind": "documentation",
+      "use": "Source for the built-in AI Agent tag and Admin API filtering/inventory reporting.",
+      "status": "verified",
+      "checked": "2026-11-18"
+    },
+    {
+      "id": "pm-direction",
+      "title": "PM team proposed direction (internal description)",
+      "url": "https://example.invalid/pm-direction",
+      "kind": "internal-note",
+      "use": "The proposed connector scope: one-way sync, PF 13.1+, foundation for agent governance. Release timing, supported IDM version, packaging and licensing are UNVERIFIED and subject to Product confirmation.",
+      "status": "unverified",
+      "checked": "2026-11-18"
+    }
+  ],
+  "cards": [
+    {
+      "id": "card-sync",
+      "label": "Run the one-way sync",
+      "description": "Sync AI-agent-tagged OAuth clients from PingFederate into PingIDM managed records.",
+      "group": "try-it",
+      "action": { "type": "route", "href": "/" }
+    },
+    {
+      "id": "card-clients",
+      "label": "See the tagged clients",
+      "description": "List the OAuth clients carrying _pf_system_tag_ai_agent.",
+      "group": "try-it",
+      "action": { "type": "route", "href": "/" }
+    },
+    {
+      "id": "card-concept",
+      "label": "Why agent identity",
+      "description": "Agents as application registrations vs managed identities: ownership, privileges, lifecycle.",
+      "group": "concept",
+      "action": { "type": "route", "href": "/" }
+    }
+  ]
+}

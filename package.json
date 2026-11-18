@@ -1,0 +1,15 @@
+{
+  "name": "pf-agent-client-sync-LAB",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server/src/server.js",
+    "test": "node --test test/*.test.js server/test/*.test.js",
+    "build": "npm --prefix web run build",
+    "doctor": "node scripts/doctor.mjs",
+    "reset": "node scripts/reset.mjs"
+  },
+  "workspaces": ["web"]
+}

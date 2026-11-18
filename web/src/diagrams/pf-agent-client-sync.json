@@ -1,0 +1,30 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "pf-agent-client-sync",
+  "title": "PF AI-agent clients → PingIDM",
+  "lede": "One-way sync: OAuth clients tagged as AI agents become managed identity records.",
+  "groups": {
+    "pf": { "label": "PingFederate 13.1", "color": "red" },
+    "lab": { "label": "Connector", "color": "dark" },
+    "idm": { "label": "PingIDM", "color": "green" }
+  },
+  "nodes": [
+    { "id": "pf", "group": "pf", "label": "PingFederate 13.1", "sub": ["OAuth clients", "_pf_system_tag_ai_agent"], "x": 0, "y": 140 },
+    { "id": "inv", "group": "pf", "label": "Admin API", "sub": ["tag filter + inventory report"], "x": 300, "y": 0 },
+    { "id": "conn", "group": "lab", "label": "Sync connector", "sub": ["one-way, read-only source"], "x": 600, "y": 140 },
+    { "id": "idm", "group": "idm", "label": "PingIDM", "sub": ["managed agent records"], "x": 900, "y": 140 },
+    { "id": "gov", "group": "idm", "label": "Foundation", "sub": ["ownership, privileges, lifecycle"], "x": 900, "y": 320 }
+  ],
+  "edges": [
+    { "source": "pf", "target": "inv", "label": "list clients", "color": "red" },
+    { "source": "inv", "target": "conn", "label": "tagged agents", "color": "dark" },
+    { "source": "conn", "target": "idm", "label": "create/update records", "color": "green" },
+    { "source": "idm", "target": "gov", "label": "identity foundation", "color": "green" }
+  ],
+  "steps": [
+    "PingFederate registers the agent as an OAuth client and tags it _pf_system_tag_ai_agent.",
+    "The connector lists clients through the Admin API and keeps only tagged ones.",
+    "Each tagged client becomes (or updates) a managed identity record in PingIDM.",
+    "The record is the foundation for ownership, privileges and lifecycle management — not full agent governance."
+  ]
+}
