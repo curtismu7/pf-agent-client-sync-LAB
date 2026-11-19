@@ -130,7 +130,7 @@ function SyncTab({ api, info }) {
   return (
     <div className="grid">
       <section className="card">
-        <h2>PingFederate 13.1 — AI-Agent tagged OAuth clients</h2>
+        <h2 data-n="1">PingFederate 13.1 — AI-Agent tagged OAuth clients</h2>
         <p className="muted">
           PF 13.1 lets agents be identified as OAuth clients carrying the system tag{' '}
           <code>_pf_system_tag_ai_agent</code>. Administrators filter those clients and generate
@@ -159,7 +159,7 @@ function SyncTab({ api, info }) {
       </section>
 
       <section className="card">
-        <h2>What this establishes</h2>
+        <h2 data-n="2">What this establishes</h2>
         <ul>
           <li>Agents stay OAuth clients in PingFederate (registration, credentials, grants).</li>
           <li>Each tagged client gets a managed identity record in PingIDM.</li>
