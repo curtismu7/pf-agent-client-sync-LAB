@@ -4,6 +4,7 @@ import TalkTrackDialog from "./talk-track/TalkTrackDialog.jsx";
 import talkMd from "../../docs/talk-track.md?raw";
 import JsonPane from './json/JsonPane.jsx';
 import FlowDiagram from './StudioDiagram.jsx';
+import './standalone-ui.css';
 import './app.css';
 
 const TABS = [

@@ -17,6 +17,8 @@ jobs:
       - run: npm --prefix web install || true
       - run: npm test
       - run: npm run build
+      # The vendored shared stylesheet must match the hash pinned when it was last re-vendored.
+      - run: bash scripts/check-ui-standard.sh
       - name: doctor (starts the server itself)
         run: |
           node server/src/server.js &
