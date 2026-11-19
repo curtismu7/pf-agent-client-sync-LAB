@@ -99,6 +99,7 @@ export default function App() {
         {tab === 'diagram' && <FlowDiagram id="pf-agent-client-sync" />}
         {tab === 'about' && <AboutTab info={info} />}
       </main>
+      <TalkTrackDialog isOpen={talkOpen} onClose={() => setTalkOpen(false)} talk={talkSteps} />
     </div>
   );
 }
@@ -280,5 +281,4 @@ function AboutTab({ info }) {
     </section>
   );
 }
-      <TalkTrackDialog isOpen={talkOpen} onClose={() => setTalkOpen(false)} talk={talkSteps} />
 
